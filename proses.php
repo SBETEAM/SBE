@@ -1,33 +1,35 @@
 <?php
-// Mencegah akses langsung tanpa melalui form
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if (!isset($_POST['nama'])) {
-    header("Location: index.php");
+    echo "<script>alert('Sesi ujian tidak valid!'); window.location.href = '/';</script>";
     exit;
 }
 
 $nama = htmlspecialchars($_POST['nama']);
 $no_absen = htmlspecialchars($_POST['no_absen']);
 
-// Kunci Jawaban Tersimpan di Server (Sama sekali tidak diekspos ke HTML)
+// Kunci Jawaban Lengkap 35 Soal
 $kunci_jawaban = [
-    'q1' => 'B', //[cite: 1]
-    'q2' => 'A', //[cite: 1]
-    'q3' => 'C', //[cite: 1]
-    'q4' => 'B', //[cite: 1]
-    'q5' => 'A', //[cite: 1]
+    'q1' => 'B', 'q2' => 'A', 'q3' => 'C', 'q4' => 'B', 'q5' => 'A',
+    'q6' => 'A', 'q7' => 'A', 'q8' => 'A', 'q9' => 'B', 'q10' => 'C',
+    'q11' => 'B', 'q12' => 'A', 'q13' => 'A', 'q14' => 'A', 'q15' => 'A',
+    'q16' => 'B', 'q17' => 'A', 'q18' => 'A', 'q19' => 'C', 'q20' => 'B',
+    'q21' => 'C', 'q22' => 'A', 'q23' => 'A', 'q24' => 'B', 'q25' => 'A',
+    'q26' => 'A', 'q27' => 'B', 'q28' => 'A', 'q29' => 'B', 'q30' => 'A',
+    'q31' => 'B', 'q32' => 'A', 'q33' => 'A', 'q34' => 'B', 'q35' => 'B'
 ];
 
 $skor = 0;
 $total_soal = count($kunci_jawaban);
 
-// Validasi Jawaban
 foreach ($kunci_jawaban as $nomor_soal => $jawaban_benar) {
     if (isset($_POST[$nomor_soal]) && $_POST[$nomor_soal] === $jawaban_benar) {
         $skor++;
     }
 }
 
-// Perhitungan Nilai (Skala 100)
 $nilai_akhir = ($skor / $total_soal) * 100;
 ?>
 <!DOCTYPE html>
@@ -61,7 +63,7 @@ $nilai_akhir = ($skor / $total_soal) * 100;
         
         <p class="text-muted">Jawaban Benar: <strong><?= $skor ?> / <?= $total_soal ?></strong></p>
         
-        <a href="index.php" class="btn-ppg">Kembali ke Beranda</a>
+        <a href="/" class="btn-ppg">Kembali ke Beranda</a>
     </div>
 
     <script>
