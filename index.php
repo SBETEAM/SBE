@@ -32,7 +32,7 @@
             <h4 class="mt-3 fw-bold text-ppg">Ujian Harian</h4>
             <p class="landing-tagline small text-muted">Silakan masukkan identitas Anda untuk memulai</p>
         </div>
-        <form method="POST" action="ujian.php">
+        <form method="POST" action="/ujian.php">
             <div class="mb-3">
                 <label class="fw-semibold mb-2">Nama Lengkap</label>
                 <input type="text" name="nama" class="form-control custom-input" placeholder="Masukkan Nama Anda" required autofocus>
